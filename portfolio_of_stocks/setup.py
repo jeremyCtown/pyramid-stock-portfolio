@@ -15,10 +15,14 @@ requires = [
     'pyramid_jinja2',
     'pyramid_retry',
     'pyramid_tm',
+    'requests',
     'SQLAlchemy',
     'transaction',
     'zope.sqlalchemy',
     'waitress',
+    'postgres',
+    'cryptacular',
+    'psycopg2',
 ]
 
 tests_require = [
