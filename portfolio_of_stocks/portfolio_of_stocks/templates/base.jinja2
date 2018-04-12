@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{{request.static_url('pyramid_stocks:static/normalize.css')}}">
+  <link rel="stylesheet" href="{{request.static_url('pyramid_stocks:static/base.css')}}">
+  <link rel="stylesheet" href="{{request.static_url('pyramid_stocks:static/layout.css')}}">
+  <link rel="stylesheet" href="{{request.static_url('pyramid_stocks:static/modules.css')}}">
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="{{request.route_url('home')}}">Home</a></li>
+        {% if request.authenticated_userid %}
+        <li><a href="{{request.route_url('portfolio')}}">Portfolio</a></li>
+        <li><a href="{{request.route_url('stock')}}">Stock Search</a></li>
+        <li><a href="{{request.route_url('logout)}}">Logout</a></li>
+        {% else %}
+        <li><a href="{{request.route_url('auth')}}">Login/Register</a></li>
+        {{% endif}}
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h1>Jeremy'$ Portfolio</h1>
+    <p>Making paper since 2009</p>
+
+    {% block content %}
+    <p></p>
+    {% endblock content %}
+
+  </main>
+</body>
+</html>
