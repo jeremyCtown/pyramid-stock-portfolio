@@ -6,21 +6,20 @@
   <button type="submit">Search</button>
 </form>
 
-<form class="newStock" action="{{request.route_url('stock')}}" method="POST">
-    <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
-    {% if company %}
-  <div class="company">
-    <h1>{{company.companyName}}</h1>
-    <p>Symbol: {{company.symbol}}</p>
-    <p>{{company.website}}</p>
-    <p>CEO: {{company.CEO}}</p>
-    <p>Industry:{{company.industry}}</p>
-    <p>Sector:{{company.sector}}</p>
-    <p>Securities:{{company.issueType}}</p>
-    <p>Summary:{{company.description}}</p>
-  </div>
-  <button name="symbol" type="submit" value="{{company.symbol}}">Add to Portfolio</button>
+{% if data %}
+<form action="{{request.route_url('stock')}}" method="POST">
+  <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
+  <input type="text" name="companyName" value="{{data.companyName}}" hidden required readonly>
+  <input type="text" name="symbol" value="{{data.symbol}}" hidden required readonly>
+  <input type="text" name="exchange" value="{{data.exchange}}" hidden readonly>
+  <input type="text" name="website" value="{{data.website}}" hidden readonly>
+  <input type="text" name="ceo" value="{{data.CEO}}" hidden readonly>
+  <input type="text" name="industry" value="{{data.industry}}" hidden readonly>
+  <input type="text" name="sector" value="{{data.sector}}" hidden readonly>
+  <input type="text" name="issueType" value="{{data.issueType}}" hidden readonly>
+  <input type="text" name="description" value="{{data.description}}" hidden readonly>
+  <button type="submit">Add to Portfolio</button>
 </form>
-  {% endif %}
+{% endif %}
 
 {% endblock content %}
