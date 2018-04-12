@@ -15,7 +15,7 @@ pbkdf2==1.3
 plaster==1.0
 plaster-pastedeploy==0.5
 pluggy==0.6.0
--e git+https://github.com/jeremyCtown/pyramid-stock-portfolio.git@9155b7a9705b57e6b59c030d232306b3ddc4d58d#egg=portfolio_of_stocks&subdirectory=portfolio_of_stocks
+# -e git+https://github.com/jeremyCtown/pyramid-stock-portfolio.git@0e44576e58632547485fcd053edb56a877a55329#egg=portfolio_of_stocks&subdirectory=portfolio_of_stocks
 postgres==2.2.1
 psycopg2==2.7.4
 py==1.5.3
