@@ -1,0 +1,26 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+<form action="{{request.route_url('stock')}}" method="GET">
+  <input type="text" name="symbol" placeholder="Enter ticker">
+  <button type="submit">Search</button>
+</form>
+
+<form class="newStock" action="{{request.route_url('stock')}}" method="POST">
+    <input type="hidden" name="csrf_token" value="{{request.session.get_csrf_token()}}">
+    {% if company %}
+  <div class="company">
+    <h1>{{company.companyName}}</h1>
+    <p>Symbol: {{company.symbol}}</p>
+    <p>{{company.website}}</p>
+    <p>CEO: {{company.CEO}}</p>
+    <p>Industry:{{company.industry}}</p>
+    <p>Sector:{{company.sector}}</p>
+    <p>Securities:{{company.issueType}}</p>
+    <p>Summary:{{company.description}}</p>
+  </div>
+  <button name="symbol" type="submit" value="{{company.symbol}}">Add to Portfolio</button>
+</form>
+  {% endif %}
+
+{% endblock content %}

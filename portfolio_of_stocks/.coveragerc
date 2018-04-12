@@ -1,0 +1,3 @@
+[run]
+source = portfolio_of_stocks
+omit = portfolio_of_stocks/test*

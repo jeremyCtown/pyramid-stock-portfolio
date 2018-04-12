@@ -1,0 +1,17 @@
+from default import 
+
+{% extends "base.jinja2" %}
+
+{% block content %}
+<div id="portfolio-detail">
+    <h1>{{stock.companyName}}</h1>
+    <p>{{stock.website}}</p>
+    <p>CEO: {{stock.CEO}}</p>
+    <p>Industry: {{stock.industry}}</p>
+    <p>Sector: {{stock.sector}}</p>
+    <p>Exchange: {{stock.exchange}}</p>
+    <p>Securities:{{stock.issueType}}</p>
+    <p>Summary:{{stock.description}}</p>
+</div>
+
+{% endblock content %}
