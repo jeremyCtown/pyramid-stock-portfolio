@@ -20,7 +20,7 @@ requires = [
     'transaction',
     'zope.sqlalchemy',
     'waitress',
-    # 'psycopg2-binary',
+    'psycopg2-binary',
     'postgres',
     'cryptacular',
 ]
