@@ -46,7 +46,7 @@ def auth_view(request):
 
     if request.method == 'GET':
         try:
-            uername = request.GET['username']
+            username = request.GET['username']
             password = request.GET['password']
 
         except KeyError:

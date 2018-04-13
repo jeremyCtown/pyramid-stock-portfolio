@@ -2,7 +2,7 @@ from pyramid.view import view_config
 from pyramid.response import Response
 from . import DB_ERR_MSG
 from sqlalchemy.exc import DBAPIError
-from ..models import Stock
+from ..models import Stock, Account
 from pyramid.httpexceptions import HTTPFound, HTTPNotFound, HTTPBadRequest
 import requests
 
