@@ -23,7 +23,7 @@ def test_stock():
     Creates testable dummy values
     """
     return Stock(
-        companyName='JRC Enterprises'
+        companyName='JRC Enterprises',
         symbol='JRCE'
     )
 
