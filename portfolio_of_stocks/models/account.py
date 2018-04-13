@@ -17,7 +17,7 @@ manager = bcrypt.BCRYPTPasswordManager()
 
 
 class Account(Base):
-    __tablename__ = 'accounts'
+    __tablename__ = 'account'
     id = Column(Integer, primary_key=True, autoincrement=True)
     username = Column(String, unique=True, nullable=False)
     email = Column(String, nullable=False)

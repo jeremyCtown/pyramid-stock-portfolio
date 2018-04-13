@@ -14,7 +14,7 @@ from .association import association_table
 
 
 class Stock(Base):
-    __tablename__ = 'stock_entries'
+    __tablename__ = 'stock'
     id = Column(Integer, primary_key=True)
     symbol = Column(String, nullable=False, unique=True)
     companyName = Column(String)
