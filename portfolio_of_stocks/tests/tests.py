@@ -1,4 +1,7 @@
 
+def test_pass_this_travis():
+    pass
+
 # def test_default_behavior_of_home_view(dummy_request):
 #     """
 #     Tests default behavior of home view
