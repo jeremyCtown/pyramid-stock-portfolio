@@ -77,7 +77,7 @@ def portfolio_view(request):
     except DBAPIError:
         return Response(DB_ERR_MSG, content_type='text/plain', status=500)
     if instance:
-        return {'entries': instance.stock_id}
+        return {'stocks': instance.stock_id}
     else:
         return HTTPNotFound()
 
@@ -100,7 +100,7 @@ def portfolio_stock_view(request):
         stock_detail = query.filter(Stock.symbol == stock_id).first()
         for each in stock_detail.account_id:
             if each.username == request.authenticated_userid:
-                return {'data': stock_detail}
+                return {'stock': stock_detail}
         raise HTTPNotFound()
     except DBAPIError:
         return Response(DB_ERR_MSG, content_type='txt/plain', status=500)
