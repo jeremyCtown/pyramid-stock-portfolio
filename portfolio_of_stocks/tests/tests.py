@@ -222,7 +222,7 @@ def test_invalid_stock_post(dummy_request):
     
     """
     import pytest
-    from ..views.default import stock_view
+    from ..views.portfolio import stock_view
     from pyramid.httpexceptions import HTTPBadRequest
 
     dummy_request.method = 'POST'
