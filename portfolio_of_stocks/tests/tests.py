@@ -32,7 +32,7 @@ def test_default_response_auth_view(dummy_request):
 
 def test_auth_signin_view(dummy_request):
     """
-    
+    Tests sign-in functionality
     """
     from ..views.auth import auth_view
     from pyramid.httpexceptions import HTTPFound
@@ -44,7 +44,7 @@ def test_auth_signin_view(dummy_request):
 
 def test_stock_added_to_db(db_session):
     """
-    
+    Tests stock is added to database
     """
     from ..models import Stock
 
@@ -57,9 +57,9 @@ def test_stock_added_to_db(db_session):
     assert len(db_session.query(Stock).all()) == 1
 
 
-def test_stock_with_no_title_throws_error(db_session):
+def test_stock_with_no_symbol_throws_error(db_session):
     """
-    
+    Tests that symbol is required to post stock
     """
     from ..models import Stock
     import pytest
@@ -77,7 +77,7 @@ def test_stock_with_no_title_throws_error(db_session):
 
 def test_auth_signup_view(dummy_request):
     """
-    
+    Tests basic auth signup functionality
     """
     from ..views.auth import auth_view
     from pyramid.httpexceptions import HTTPFound
@@ -91,7 +91,7 @@ def test_auth_signup_view(dummy_request):
 
 def test_bad_auth_request(dummy_request):
     """
-    
+    Tests bad signup post method
     """
     from ..views.auth import auth_view
     from pyramid.httpexceptions import HTTPBadRequest
@@ -105,7 +105,7 @@ def test_bad_auth_request(dummy_request):
 
 def test_bad_request_method_auth_signup_view(dummy_request):
     """
-    
+    Tests bad signup put method 
     """
     from ..views.auth import auth_view
     from pyramid.httpexceptions import HTTPFound
@@ -117,9 +117,9 @@ def test_bad_request_method_auth_signup_view(dummy_request):
     assert isinstance(response, HTTPFound)
 
 
-def test_default_notfound(dummy_request):
+def test_default_not_found(dummy_request):
     """
-    
+    Tests not found response
     """
     from ..views.notfound import notfound_view
 
@@ -128,7 +128,7 @@ def test_default_notfound(dummy_request):
 
 def test_default_logout(dummy_request):
     """
-    
+    Tests logout works
     """
     from ..views.auth import logout
     from pyramid.httpexceptions import HTTPFound
@@ -139,7 +139,7 @@ def test_default_logout(dummy_request):
 
 def test_default_response_portfolio_view(dummy_request):
     """
-    
+    Tests empty portfolio returns HTTPNotFound
     """
     from ..views.portfolio import portfolio_view
 
@@ -147,9 +147,9 @@ def test_default_response_portfolio_view(dummy_request):
     assert isinstance(response, HTTPNotFound)
 
 
-def test_default_get_portfolio_symbol_view(dummy_request, db_session, test_stock, test_account):
+def test_default_portfolio_stock_view(dummy_request, db_session, test_stock, test_account):
     """
-    
+    Tests portfolio stock view from portfolio
     """
     from ..views.portfolio import portfolio_stock_view
 
@@ -165,7 +165,7 @@ def test_default_get_portfolio_symbol_view(dummy_request, db_session, test_stock
 
 def test_detail_not_found(dummy_request):
     """
-    
+    Tests HTTPNotFound for non-existant stock in portfolio
     """
     from ..views.portfolio import portfolio_stock_view
     from pyramid.httpexceptions import HTTPNotFound
@@ -176,7 +176,7 @@ def test_detail_not_found(dummy_request):
 
 def test_default_response_stock_view(dummy_request):
     """
-    
+    Tests default response to empty request
     """
     from ..views.portfolio import stock_view
 
@@ -187,7 +187,7 @@ def test_default_response_stock_view(dummy_request):
 
 def test_valid_stock_post_adds_record_to_db(dummy_request, test_account, db_session):
     """
-    
+    Tests adding a stock to the database
     """
     from ..views.portfolio import stock_view
     from ..models import Stock
@@ -219,7 +219,7 @@ def test_valid_stock_post_adds_record_to_db(dummy_request, test_account, db_sess
 
 def test_invalid_stock_post(dummy_request):
     """
-    
+    Tests invalid stock is not added
     """
     import pytest
     from ..views.portfolio import stock_view
