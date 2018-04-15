@@ -1,1 +1,20 @@
-[]
+[
+  "portfolio_of_stocks/tests/tests.py::test_pass_this_travis",
+  "portfolio_of_stocks/tests/tests.py::test_default_behavior_of_home_view",
+  "portfolio_of_stocks/tests/tests.py::test_default_response_auth_view",
+  "portfolio_of_stocks/tests/tests.py::test_auth_signin_view",
+  "portfolio_of_stocks/tests/tests.py::test_stock_added_to_db",
+  "portfolio_of_stocks/tests/tests.py::test_stock_with_no_title_throws_error",
+  "portfolio_of_stocks/tests/tests.py::test_auth_signup_view",
+  "portfolio_of_stocks/tests/tests.py::test_bad_auth_request",
+  "portfolio_of_stocks/tests/tests.py::test_bad_request_method_auth_signup_view",
+  "portfolio_of_stocks/tests/tests.py::test_default_notfound",
+  "portfolio_of_stocks/tests/tests.py::test_default_logout",
+  "portfolio_of_stocks/tests/tests.py::test_default_response_portfolio_view",
+  "portfolio_of_stocks/tests/tests.py::test_default_get_portfolio_symbol_view",
+  "portfolio_of_stocks/tests/tests.py::test_detail_not_found",
+  "portfolio_of_stocks/tests/tests.py::test_default_response_stock_view",
+  "portfolio_of_stocks/tests/tests.py::test_valid_stock_post_adds_record_to_db",
+  "portfolio_of_stocks/tests/tests.py::test_invalid_stock_post",
+  "portfolio_of_stocks/tests/tests.py::test_jeremy_is_awesome"
+]

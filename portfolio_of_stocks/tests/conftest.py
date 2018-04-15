@@ -5,11 +5,11 @@ from ..models.meta import Base
 from ..models import Stock, Account
 
 @pytest.fixture
-def dummy_request():
+def dummy_request(db_session):
     """
     Creates empty dummy request to server
     """
-    return testing.DummyRequest()
+    return testing.DummyRequest(dbsession=db_session)
 
 
 @pytest.fixture

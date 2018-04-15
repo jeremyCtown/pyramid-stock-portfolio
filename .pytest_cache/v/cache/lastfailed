@@ -1,3 +1,4 @@
 {
-  "": true
+  "portfolio_of_stocks/tests/tests.py::test_default_response_get_stock_view": true,
+  "portfolio_of_stocks/tests/tests.py::test_invalid_stock_post": true
 }
