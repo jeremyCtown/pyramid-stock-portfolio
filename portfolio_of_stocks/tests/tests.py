@@ -30,9 +30,28 @@ def test_default_response_auth_view(dummy_request):
     assert response == {}
 
 
-def test_auth_signin_view(dummy_request):
+def test_account_sign_up_and_login(dummy_request):
     """
-    Tests sign-in functionality
+    Tests basic auth signup and signin interactivity
+    """
+    from ..views.auth import auth_view
+    from pyramid.httpexceptions import HTTPFound
+
+    dummy_request.POST = {'username': 'watdude', 'password': 'watup', 'email': 'watdude@wat.com'}
+    dummy_request.method = 'POST'
+    response = auth_view(dummy_request)
+    assert response.status_code == 302
+    assert isinstance(response, HTTPFound)
+    dummy_request.GET = {'username': 'watdude', 'password': 'watup'}
+    dummy_request.method = 'GET'
+    response = auth_view(dummy_request)
+    assert response.status_code == 302
+    assert isinstance(response, HTTPFound)
+
+
+def test_bad_auth_signin_view(dummy_request):
+    """
+    Tests bad sign-in raise 401 response
     """
     from ..views.auth import auth_view
     from pyramid.httpexceptions import HTTPFound
@@ -40,6 +59,50 @@ def test_auth_signin_view(dummy_request):
     dummy_request.GET = {'username': 'watdude', 'password': 'watup'}
     response = auth_view(dummy_request)
     assert response.status_code == 401
+
+
+def test_bad_auth_request(dummy_request):
+    """
+    Tests bad signup post method
+    """
+    from ..views.auth import auth_view
+    from pyramid.httpexceptions import HTTPBadRequest
+
+    dummy_request.POST = {'password': 'watup', 'email': 'watdude@wat.com'}
+    dummy_request.method = 'POST'
+    response = auth_view(dummy_request)
+    assert response.status_code == 400
+    assert isinstance(response, HTTPBadRequest)
+
+
+def test_bad_request_method_auth_signup_view(dummy_request):
+    """
+    Tests bad signup put method 
+    """
+    from ..views.auth import auth_view
+    from pyramid.httpexceptions import HTTPFound
+
+    dummy_request.POST = {'password': 'watup', 'email': 'watdude@wat.com'}
+    dummy_request.method = 'PUT'
+    response = auth_view(dummy_request)
+    assert response.status_code == 302
+    assert isinstance(response, HTTPFound)
+
+
+def test_account_added_to_database(db_session, test_account):
+    """
+    Test adding a new account to the database and ensure unique IDs
+    """
+    from ..models import Account
+
+    assert len(db_session.query(Account).all()) == 0
+    account = test_account
+    db_session.add(account)
+    assert len(db_session.query(Account).all()) == 1
+    db_session.add(account)
+    assert len(db_session.query(Account).all()) == 1
+    db_session.add(Account(username='jeremy', email='jeremy@watup.com', password='password'))
+    assert len(db_session.query(Account).all()) == 2
 
 
 def test_stock_added_to_db(db_session):
@@ -84,34 +147,6 @@ def test_auth_signup_view(dummy_request):
 
     dummy_request.POST = {'username': 'watdude', 'password': 'watup', 'email': 'watdude@wat.com'}
     dummy_request.method = 'POST'
-    response = auth_view(dummy_request)
-    assert response.status_code == 302
-    assert isinstance(response, HTTPFound)
-
-
-def test_bad_auth_request(dummy_request):
-    """
-    Tests bad signup post method
-    """
-    from ..views.auth import auth_view
-    from pyramid.httpexceptions import HTTPBadRequest
-
-    dummy_request.POST = {'password': 'watup', 'email': 'watdude@wat.com'}
-    dummy_request.method = 'POST'
-    response = auth_view(dummy_request)
-    assert response.status_code == 400
-    assert isinstance(response, HTTPBadRequest)
-
-
-def test_bad_request_method_auth_signup_view(dummy_request):
-    """
-    Tests bad signup put method 
-    """
-    from ..views.auth import auth_view
-    from pyramid.httpexceptions import HTTPFound
-
-    dummy_request.POST = {'password': 'watup', 'email': 'watdude@wat.com'}
-    dummy_request.method = 'PUT'
     response = auth_view(dummy_request)
     assert response.status_code == 302
     assert isinstance(response, HTTPFound)
@@ -165,7 +200,7 @@ def test_default_portfolio_stock_view(dummy_request, db_session, test_stock, tes
 
 def test_detail_not_found(dummy_request):
     """
-    Tests HTTPNotFound for non-existant stock in portfolio
+    Tests HTTPNotFound for non-existent stock in portfolio
     """
     from ..views.portfolio import portfolio_stock_view
     from pyramid.httpexceptions import HTTPNotFound
@@ -182,6 +217,18 @@ def test_default_response_stock_view(dummy_request):
 
     response = stock_view(dummy_request)
     assert len(response) == 0
+    assert type(response) == dict
+
+
+def test_default_response_search_view(dummy_request):
+    """
+    Test default response on stock search
+    """
+    from ..views.portfolio import stock_view
+    
+    request = dummy_request
+    request.GET = {'symbol': 'AAPL'}
+    response = stock_view(dummy_request)
     assert type(response) == dict
 
 

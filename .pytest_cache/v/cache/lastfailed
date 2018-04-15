@@ -1,3 +1,4 @@
 {
+  "portfolio_of_stocks/tests/tests.py::test_account_log_in": true,
   "portfolio_of_stocks/tests/tests.py::test_default_response_get_stock_view": true
 }
