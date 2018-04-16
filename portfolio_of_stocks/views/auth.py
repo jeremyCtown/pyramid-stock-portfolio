@@ -12,6 +12,9 @@ from . import DB_ERR_MSG
     renderer='../templates/auth.jinja2',
     permission=NO_PERMISSION_REQUIRED)
 def auth_view(request):
+    """
+    Takes request from auth route and returns a response
+    """
     if request.method == 'POST':
         try:
             username = request.POST['username']
@@ -43,7 +46,7 @@ def auth_view(request):
 
     if request.method == 'GET':
         try:
-            uername = request.GET['username']
+            username = request.GET['username']
             password = request.GET['password']
 
         except KeyError:
@@ -60,5 +63,8 @@ def auth_view(request):
 
 @view_config(route_name='logout')
 def logout(request):
+    """
+    Logs user out and resets headers
+    """
     headers = forget(request)
     return HTTPFound(location=request.route_url('home'), headers=headers)

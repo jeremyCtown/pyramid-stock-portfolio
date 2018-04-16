@@ -1,0 +1,16 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+<h1>Welcome to my Portfolio</h1>
+
+<ul>
+  {% for stock in stocks %}
+  <li>
+    <h3>{{stock.companyName}}</h3>
+    <p>{{stock.website}}</p>
+    <p>CEO: {{stock.CEO}}</p>
+    <p><a href="{{request.route_url('detail', symbol=stock.symbol)}}">View more</a></p>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock content %}
